@@ -1,0 +1,11 @@
+{
+  "name": "demonstration",
+  "version": "0.0.0",
+  "homepage": "https://github.com/derekmpham/querygithubdata",
+  "authors": [
+    "Derek Pham <derekmpham@gmail.com>"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}
