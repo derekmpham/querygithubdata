@@ -9,9 +9,6 @@ import json
 def index(request):
 	return HttpResponse('Hello World!')
 
-def test(request):
-	return HttpResponse('My second view!')
-
 def profile(request):
     parsedData = []
     if request.method == 'POST':
