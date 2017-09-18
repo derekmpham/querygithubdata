@@ -49,10 +49,10 @@
 			camera = new THREE.PerspectiveCamera(90, window.innerWidth/window.innerHeight, 0.01, 1000);
 			
 			// set x (horizontal), y (vertical), and z (forward/backward) position of camera
-			camera.position.set(0, 10, 40);
+			camera.position.set(0, 5, 10);
 
 			controls = new THREE.TrackballControls(camera);
-			controls.target.set(50, -300, -640);
+			controls.target.set(0, 0, 0);
 			controls.noZoom = true;
 
 			// create renderer, set background color, make responsive, and add to DOM
@@ -111,10 +111,8 @@
 				});
 
 				// set x, y, and z position of octocat object
-				geometry.position.set(100, -300, -640);
+				geometry.position.set(-4, 0, 0);
 
-				// rotate object 90 degrees clockwise
-				geometry.rotation.y = -Math.PI/2;
 				scene.add(geometry);
 
 			});
