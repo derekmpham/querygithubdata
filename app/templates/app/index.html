@@ -22,6 +22,127 @@
 	<script src="/static/js/OBJLoader.js"></script>
 	<script src="/static/js/Detector.js"></script>
 	<h1 style="position:absolute;left:20px">Git Stalking</h1>
+	<script>
+		
+		// check if browser supports webgl
+		if (!Detector.webgl) {
+			Detector.addGetWebGLMessage();
+		}
+
+		// set up global variables
+		var container, loader;
+		var camera, scene, renderer;
+		var directionalLight, pointLight;
+		var controls;
+		var spotLight;
+
+		init();
+		animate();
+
+		// set up scene
+		function init() {
+
+			container = document.createElement('div');
+			document.body.appendChild(container);
+
+			// create camera
+			camera = new THREE.PerspectiveCamera(90, window.innerWidth/window.innerHeight, 0.01, 1000);
+			
+			// set x (horizontal), y (vertical), and z (forward/backward) position of camera
+			camera.position.set(0, 10, 40);
+
+			controls = new THREE.TrackballControls(camera);
+			controls.target.set(50, -300, -640);
+			controls.noZoom = true;
+
+			// create renderer, set background color, make responsive, and add to DOM
+			renderer = new THREE.WebGLRenderer({antialias: true});
+			renderer.setClearColor(0x202020);
+			renderer.setPixelRatio(window.devicePixelRatio);
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			container.appendChild(renderer.domElement);
+
+			// assume texture images are gamma-corrected, apply standard tone mapping, and set tone mapping exposure
+			renderer.gammaInput = true;
+			renderer.gammaOutput = true;
+			renderer.toneMapping = THREE.ReinhardToneMapping;
+			renderer.toneMappingExposure = 3;
+
+			// load textures of cube/skybox (divided into six sides)
+			var textureCube = new THREE.CubeTextureLoader().setPath('models/cube_texture/swedish_royal_castle/').load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']);
+
+			// create scene object and add cube/skybox into scene's background
+			scene = new THREE.Scene();
+			scene.background = textureCube;
+
+			// add lights to scene
+			var ambient = new THREE.AmbientLight(0xffffff);
+			scene.add(ambient);
+
+			directionalLight = new THREE.DirectionalLight(0xffffff, 20);
+			directionalLight.position.set(2, 1.2, 10).normalize();
+			scene.add(directionalLight);
+
+			directionalLight = new THREE.DirectionalLight(0xffffff, 10);
+			directionalLight.position.set(-2, 1.2, -10).normalize();
+			scene.add(directionalLight);
+
+			pointLight = new THREE.PointLight(0xffffff, 10);
+			pointLight.position.set(2000, 1200, 10000);
+			scene.add(pointLight);
+
+			var loader = new THREE.OBJLoader();
+
+			// add gold material to shoe
+			var material = new THREE.MeshPhongMaterial({color: 0xffffff, specular: 0xffffff, shininess: 100, envMap: textureCube, combine: THREE.MultiplyOperation});
+			
+			// load shoe object
+			loader.load('models/obj/nike_yeezy/shoe.obj', function (geometry) {
+
+				var loader = new THREE.TextureLoader();
+
+				// give metallic characteristic to material
+				material.metalness = 1;
+
+				geometry.traverse(function (child) {
+					if (child instanceof THREE.Mesh) {
+						child.material = material;
+					}
+				});
+
+				// set x, y, and z position of shoe object
+				geometry.position.set(100, -300, -640);
+
+				// rotate object 90 degrees clockwise
+				geometry.rotation.y = -Math.PI/2;
+				scene.add(geometry);
+
+			});
+
+			// enable resizing
+			window.addEventListener('resize', onWindowResize, false);
+		}
+
+		// resizing window
+		function onWindowResize(event) {
+			// update screen width and height
+			SCREEN_WIDTH = window.innerWidth;
+			SCREEN_HEIGHT = window.innerHeight;
+			// update renderer size
+			renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+			// update camera's aspect ratio
+			camera.aspect = SCREEN_WIDTH/SCREEN_HEIGHT;
+			camera.updateProjectionMatrix();
+		}
+
+		// render scene and update render as needed
+		function animate() {
+			requestAnimationFrame(animate);
+			controls.update();
+			renderer.render(scene, camera);
+		}
+
+	</script>
 	<a class="btn btn-lg btn-primary" href="/app/profile/" style="position:fixed;bottom:45px;left:50%;transform:translate(-50%, -50%);">Enter</a>
 </body>
 </html>
