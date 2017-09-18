@@ -93,11 +93,11 @@
 
 			var loader = new THREE.OBJLoader();
 
-			// add gold material to shoe
+			// add silver material to octocat
 			var material = new THREE.MeshPhongMaterial({color: 0xffffff, specular: 0xffffff, shininess: 100, envMap: textureCube, combine: THREE.MultiplyOperation});
 			
-			// load shoe object
-			loader.load('models/obj/nike_yeezy/shoe.obj', function (geometry) {
+			// load octocat object
+			loader.load('/static/models/obj/github_logo/octocat.obj', function (geometry) {
 
 				var loader = new THREE.TextureLoader();
 
@@ -110,7 +110,7 @@
 					}
 				});
 
-				// set x, y, and z position of shoe object
+				// set x, y, and z position of octocat object
 				geometry.position.set(100, -300, -640);
 
 				// rotate object 90 degrees clockwise
