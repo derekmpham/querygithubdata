@@ -9,7 +9,7 @@ import json
 def index(request):
 	return render(request, 'app/index.html')
 
-def profile(request):
+def search(request):
     parsedData = []
     if request.method == 'POST':
         username = request.POST.get('user')
@@ -27,4 +27,4 @@ def profile(request):
             userData['followers'] = data['followers']
             userData['following'] = data['following']
         parsedData.append(userData)
-    return render(request, 'app/profile.html', {'data': parsedData})
+    return render(request, 'app/search.html', {'data': parsedData})
