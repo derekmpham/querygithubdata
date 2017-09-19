@@ -69,7 +69,7 @@
 			renderer.toneMappingExposure = 3;
 
 			// load textures of cube/skybox (divided into six sides)
-			var textureCube = new THREE.CubeTextureLoader().setPath('/static/models/cube_texture/swedish_royal_castle/').load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']);
+			var textureCube = new THREE.CubeTextureLoader().setPath('/static/models/cube_texture/gray/').load(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']);
 
 			// create scene object and add cube/skybox into scene's background
 			scene = new THREE.Scene();
@@ -79,22 +79,22 @@
 			var ambient = new THREE.AmbientLight(0xffffff);
 			scene.add(ambient);
 
-			directionalLight = new THREE.DirectionalLight(0xffffff, 20);
+			directionalLight = new THREE.DirectionalLight(0xffffff, 200);
 			directionalLight.position.set(2, 1.2, 10).normalize();
 			scene.add(directionalLight);
 
-			directionalLight = new THREE.DirectionalLight(0xffffff, 10);
+			directionalLight = new THREE.DirectionalLight(0xffffff, 100);
 			directionalLight.position.set(-2, 1.2, -10).normalize();
 			scene.add(directionalLight);
 
-			pointLight = new THREE.PointLight(0xffffff, 10);
+			pointLight = new THREE.PointLight(0xffffff, 100);
 			pointLight.position.set(2000, 1200, 10000);
 			scene.add(pointLight);
 
 			var loader = new THREE.OBJLoader();
 
 			// add silver material to octocat
-			var material = new THREE.MeshPhongMaterial({color: 0xffffff, specular: 0xffffff, shininess: 100, envMap: textureCube, combine: THREE.MultiplyOperation});
+			var material = new THREE.MeshPhongMaterial({color: 0x000000, specular: 0x000000, shininess: 10, envMap: textureCube, combine: THREE.MultiplyOperation});
 			
 			// load octocat object
 			loader.load('/static/models/obj/github_logo/octocat.obj', function (geometry) {
