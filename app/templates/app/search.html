@@ -22,10 +22,11 @@
 				{% csrf_token %}
 
 				<br>
-				<input type="text" name="user" class="form-control" placeholder="Github User Name, e.g: derekmpham" value="" required autofocus>
+				<input type="text" name="user" class="form-control" placeholder="Look up Github username (i.e. derekmpham)" value="" required autofocus>
 				<br>
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Get Data</button>
 			</form>
+			<br>
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped tablesorter">
 					<thead>
@@ -56,6 +57,9 @@
 
 				</table>
 			</div>
+		</div>
+		<div style="text-align:center;">
+			<img src="/static/images/gh_logo.png" class="img-fluid" alt="Github logo">
 		</div>
 	</body>
 	</html>
