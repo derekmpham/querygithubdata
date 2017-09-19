@@ -1,0 +1,1 @@
+web: gunicorn querygithubdata.wsgi --log-file -
