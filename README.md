@@ -6,12 +6,12 @@ Look up what your fellow coders are doing. Tech stack: [Django](https://www.djan
 
 ![alt tag](https://github.com/derekmpham/querygithubdata/blob/master/octocat-move.gif)
 
-
+<br>
 
 ## Search someone's GitHub public activities by username
 
 ![alt tag](https://github.com/derekmpham/querygithubdata/blob/master/github-query.gif)
 
-
+<br>
 
 ## Click [here](https://git-stalking.herokuapp.com/) to see it live
